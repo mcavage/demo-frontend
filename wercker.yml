@@ -16,12 +16,17 @@ deploy:
     - bash-template:
         cwd: $WERCKER_ROOT/kubernetes
 
-    # - kubectl:
-    #     server: $KUBERNETES_MASTER
-    #     username: $KUBERNETES_USERNAME
-    #     password: $KUBERNETES_PASSWORD
-    #     insecure-skip-tls-verify: true
-    #     command: apply -f $WERCKER_ROOT/kuberenetes/deployment.yml
+    - script:
+        name: show kube yaml
+        code: |
+          cat $WERCKER_ROOT/kubernetes/deployment.yml
+
+    - kubectl:
+        server: $KUBERNETES_MASTER
+        username: $KUBERNETES_USERNAME
+        token: $KUBERNETES_PASSWORD
+        insecure-skip-tls-verify: true
+        command: apply -f $WERCKER_ROOT/kuberenetes/deployment.yml
 
     # - internal/docker-push:
     #     username: $DOCKERHUB_USERNAME
