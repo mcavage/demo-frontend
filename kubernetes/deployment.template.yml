@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: https://registry-alpha.oracledx.com/mcavage/demo-frontend:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+        image: registry-alpha.oracledx.com/mcavage/demo-frontend:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         ports:
         - containerPort: 8080
