@@ -23,8 +23,7 @@ deploy:
 
     - kubectl:
         server: $KUBERNETES_MASTER
-        username: $KUBERNETES_USERNAME
-        token: $KUBERNETES_PASSWORD
+        token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f $WERCKER_ROOT/kuberenetes/deployment.yml
 
