@@ -25,7 +25,7 @@ deploy:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: apply -f $WERCKER_ROOT/kuberenetes/deployment.yml
+        command: apply -f $WERCKER_ROOT/kubernetes/deployment.yml
 
     # - internal/docker-push:
     #     username: $DOCKERHUB_USERNAME
