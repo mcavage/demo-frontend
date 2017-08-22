@@ -13,4 +13,7 @@ spec:
       - name: frontend
         image: registry-alpha.oracledx.com/mcavage/demo-frontend:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         ports:
-        - containerPort: 8080
+          - containerPort: 8080
+
+      imagePullSecrets:
+        - name: mcavage
