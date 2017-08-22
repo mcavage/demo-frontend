@@ -6,8 +6,19 @@ build:
 deploy:
   steps:
     - internal/docker-push:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
-        repository: mcavage/demo-frontend
+        username: $DOCKERHUB_USERNAME
+        password: $DOCKERHUB_PASSWORD
+        repository: $DOCKERHUB_REPO
         ports: 8080
-        cmd: /bin/bash -c "cd /pipeline/source && npm start"
+        cmd: npm start
+        working-dir: $WERCKER_ROOT
+        tag: $WERCKER_GIT_COMMIT
+    # - kubectl:
+    #     server: $KUBERNETES_MASTER
+    #     username: $KUBERNETES_USERNAME
+    #     password: $KUBERNETES_PASSWORD
+    #     command: create -f my-python-app-deployment.json
+
+# $ kubectl run frontend --replicas=5 --labels="run=load-balancer-example" --image=mcavage/demo-frontend:latest  --port=8080
+# $ kubectl expose deployment frontend --type=LoadBalancer --name=crow-demo
+# $ kubectl get services crow-demo
