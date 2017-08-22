@@ -5,16 +5,8 @@ build:
 
 docker-push:
   steps:
-    # - internal/docker-push:
-    #     username: $DOCKERHUB_USERNAME
-    #     password: $DOCKERHUB_PASSWORD
-    #     repository: $DOCKERHUB_REPO
-    #     ports: 8080
-    #     cmd: npm start
-    #     working-dir: $WERCKER_ROOT
-    #     tag: $WERCKER_GIT_COMMIT
-    - internal/docker-push
-        tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
+    - internal/docker-push:
+        tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         cmd: npm start
         ports: 8080
         working-dir: $WERCKER_ROOT
@@ -30,6 +22,15 @@ deploy:
     #     password: $KUBERNETES_PASSWORD
     #     insecure-skip-tls-verify: true
     #     command: apply -f $WERCKER_ROOT/kuberenetes/deployment.yml
+
+    # - internal/docker-push:
+    #     username: $DOCKERHUB_USERNAME
+    #     password: $DOCKERHUB_PASSWORD
+    #     repository: $DOCKERHUB_REPO
+    #     ports: 8080
+    #     cmd: npm start
+    #     working-dir: $WERCKER_ROOT
+    #     tag: $WERCKER_GIT_COMMIT
 
 # $ kubectl run frontend --replicas=5 --labels="run=load-balancer-example" --image=mcavage/demo-frontend:latest  --port=8080
 # $ kubectl expose deployment frontend --type=LoadBalancer --name=crow-demo
