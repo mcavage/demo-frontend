@@ -1,10 +1,7 @@
 var bunyan = require('bunyan');
 var restify = require('restify');
 
-function respond(req, res, next) {
-    res.send('hello ' + req.params.name);
-    return next();
-}
+var lib = require('./lib');
 
 (function main() {
     var log = bunyan.createLogger({
@@ -19,8 +16,8 @@ function respond(req, res, next) {
     }));
     server.use(restify.plugins.acceptParser(server.acceptable));
 
-    server.get('/hello/:name', respond);
-    server.head('/hello/:name', respond);
+    server.get('/echo/:name', lib.echoHandler);
+    server.head('/echo/:name', lib.echoHandler);
 
     server.listen(8080, function main() {
         log.info({
