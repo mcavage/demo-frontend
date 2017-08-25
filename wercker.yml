@@ -1,14 +1,32 @@
 box: node
+
+services:
+  - name: backend
+    id: mcavage/demo-backend
+
+dev:
+  steps:
+    - internal/shell:
+      cmd: /bin/sh
+
 build:
   steps:
-    - npm-install
-    - npm-test
-
     - script:
         name: echo nodejs information
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+
+    - npm-install
+
+test:
+  steps:
+    - script:
+        name: "Wait for backend"
+        code: |
+          while ! curl -s http://$BACKEND_PORT_8080_TCP_ADDR:$BACKEND_PORT_8080_TCP_PORT > /dev/null ; do sleep 1 ; done
+
+    - npm-test
 
 docker-push:
   steps:
