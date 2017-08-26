@@ -12,6 +12,12 @@ tap.test('getGitCommit', function (t) {
 });
 
 tap.test('echo', function (t) {
-    t.equal('Hello, Mark\n', lib.echo('Mark'));
-    t.end();
+    const name = 'mark'
+    lib.echo(name, function (err, obj) {
+        t.ifError(err);
+        t.ok(obj);
+        t.equal(name, obj.name);
+        t.ok(obj.time);
+        t.end();
+    });
 });
